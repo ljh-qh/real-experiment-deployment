@@ -1,0 +1,45 @@
+client:
+  arm_error_deg: 8
+  duration: 0
+  feedback_confirm_ms: 100
+  hand_error_deg: 15
+  hz: 30
+  max_hand_step_deg: 2.0
+  max_joint_step_deg: 0
+  prefetch_delay: 16
+  sync: false
+  rtc_commit_steps: 14
+  rtc_prefix_capacity: 20
+client_entrypoint: confirmed_client.py
+hardware:
+  acc_ratio: 20
+  vel_ratio: 20
+model: openwam
+worker:
+  args:
+    action-endpoint: tcp://127.0.0.1:17201
+    checkpoint: $DEPLOY/assets/checkpoints/openwam_badminton
+    checkpoint-name: checkpoint_step_35705.safetensors
+    codec: $DEPLOY/vendor/bridge/codec.py
+    config: $DEPLOY/configs/inference/openwam_rtc.yaml
+    context-cache: true
+    control-endpoint: tcp://127.0.0.1:17202
+    observation-endpoint: tcp://127.0.0.1:17200
+    ready-file: $OUTPUT/worker_ready.json
+    warmup-fixtures: $DEPLOY/assets/references/fixed_observation_diagnosis
+    rtc-mode: identity_vjp
+    rtc-max-guidance: 10.0
+  cwd: $DEPLOY
+  env:
+    DIFFSYNTH_ATTENTION_IMPLEMENTATION: torch
+    MKL_NUM_THREADS: '2'
+    OMP_NUM_THREADS: '2'
+    OPENBLAS_NUM_THREADS: '2'
+    PYTHONPATH: $DEPLOY/src:$DEPLOY/vendor/bridge:$DEPLOY/vendor/openwam:$DEPLOY/assets/robot:$DEPLOY/deps/bridge
+    WAM_ATTENTION_IMPL: sdpa
+  python: $DEPLOY/envs/openwam/bin/python
+  script: $DEPLOY/src/rtc_worker.py
+rtc:
+  experimental: true
+  mode: identity_vjp
+  validation_file: $DEPLOY/configs/rtc_validation.json

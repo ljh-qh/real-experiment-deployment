@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "root": "/home/admin2026/lianjh/real_experiment/deployment/assets/checkpoints",
+  "models": {
+    "openwam_badminton": {
+      "directory": "/home/admin2026/lianjh/real_experiment/deployment/assets/checkpoints/openwam_badminton",
+      "checkpoint": "checkpoint_step_35705.safetensors",
+      "training_step": 35705,
+      "previous_name": "openwam_badminton_35705",
+      "sha256": "5a7a22b70ad3b7506d4a7c3f226fdb39f96240b0d0979d92a461a08a1b5cc65e",
+      "hash_evidence": "Verified during asset migration; same file inode/size/mtime preserved by rename"
+    },
+    "openwam_top": {
+      "directory": "/home/admin2026/lianjh/real_experiment/deployment/assets/checkpoints/openwam_top",
+      "checkpoint": "checkpoint_step_33050.safetensors",
+      "training_step": 33050,
+      "previous_name": "openwam_top_33050",
+      "sha256": "c912fbb8d0a5a97a91d9e03b49b0805c1f38842687ee5464074b7787249da1ba",
+      "hash_evidence": "Verified during asset migration; same file inode/size/mtime preserved by rename"
+    },
+    "easywam_badminton": {
+      "directory": "/home/admin2026/lianjh/real_experiment/deployment/assets/checkpoints/easywam_badminton",
+      "checkpoint": "step_004465.pt",
+      "training_step": 4465,
+      "previous_name": "easywam_badminton_v1",
+      "sha256": "b38600351c656321930719783cfce634669f9b34af066aed2b9ea26959185fc7",
+      "hash_evidence": "Verified during asset migration; same file inode/size/mtime preserved by rename"
+    },
+    "easywam_top": {
+      "directory": "/home/admin2026/lianjh/real_experiment/deployment/assets/checkpoints/easywam_top",
+      "checkpoint": "step_004131.pt",
+      "training_step": 4131,
+      "previous_name": "easywam_top_4131",
+      "sha256": "4c655bc4c60440fa3e118388338fed706b5165a2379c5236fe63ba16c143e6e6",
+      "hash_evidence": "Verified during asset migration; same file inode/size/mtime preserved by rename"
+    },
+    "openwam_bottle": {
+      "directory": "/home/admin2026/lianjh/real_experiment/deployment/assets/checkpoints/openwam_bottle",
+      "checkpoint": "checkpoint_step_65640.safetensors",
+      "training_step": 65640,
+      "sha256": "1bbea8782ec8d525d6a0ca42980f77befd151f51670978e7b195d7459cff6294",
+      "hash_evidence": "Independent copy SHA256 verified 2026-11-08"
+    },
+    "easywam_bottle": {
+      "directory": "/home/admin2026/lianjh/real_experiment/deployment/assets/checkpoints/easywam_bottle",
+      "checkpoint": "step_008205.pt",
+      "training_step": 8205,
+      "sha256": "2158986697db7d534a984964c989c9ffd074a5fa7f53e51a62e5eaff609ca7f2",
+      "hash_evidence": "Full-file SHA256 reverified 2026-11-09 against deployment_provenance.json"
+    }
+  }
+}

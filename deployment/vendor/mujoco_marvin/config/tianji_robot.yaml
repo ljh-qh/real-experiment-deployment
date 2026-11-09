@@ -1,0 +1,144 @@
+# =============================================================================
+# Tianji Robot Unified Configuration File
+# =============================================================================
+# Single source of truth for the shared sim/hardware home posture, the fixed
+# hand mounts, and the legacy ROS/vendor-IK cached poses. This copy ships
+# with mujoco-marvin; the controller IP is intentionally NOT set here — pass
+# --robot-ip or set TIANJI_ROBOT_IP for arms/both output.
+#
+# Usage:
+#   from mujoco_marvin.robot_description import load_home_joints
+#   home = load_home_joints()            # profile "default"
+#   home = load_home_joints(profile="elbows_90")
+# =============================================================================
+
+# Robot connection parameters. Empty on purpose: provide the real controller
+# IP via --robot-ip, the TIANJI_ROBOT_IP environment variable, or edit this
+# file locally (it is git-ignored only when you keep it out of the repo —
+# prefer the environment variable on shared machines).
+robot_ip: ""
+
+# Kinematics configuration file (legacy ROS driver; unused by mujoco-marvin)
+kine_config_file: "ccs_m6.MvKDCfg"
+
+# =============================================================================
+# Initial joint angles (degrees)
+# =============================================================================
+# Joint1..Joint7, degrees. Unified sim/robot/both all read these values.
+# Selected by the offline teleop workspace study (home_pose_study).
+init_joints:
+  left:  [-94.16, 70.01, 106.42, -97.91, -20.45, 5.88, 18.17]
+  right: [94.16, 70.01, -106.42, -97.91, 20.45, 5.88, -18.17]
+
+# Retain the earlier requested posture for reproducible A/B comparisons.
+home_profiles:
+  elbows_90:
+    left:  [-90.0, 90.0, 90.0, -90.0, 0.0, 0.0, 0.0]
+    right: [90.0, 90.0, -90.0, -90.0, 0.0, 0.0, 0.0]
+
+# Fixed TCP -> Wuji palm-link mounting for the accepted visual model.
+# Quaternion order is MuJoCo [w,x,y,z]. Do not recompute from init_joints:
+# changing the arm home must move the mounted hand, not silently remount it.
+# Real installation orientation still needs physical confirmation.
+# Per-arm tool dynamics for the gravity compensator: [mass kg, com_x mm,
+# com_y mm, com_z mm, inertia x6], in the flange/TCP frame (kineParams stay
+# identity). Must be updated whenever the mounted end-effector changes.
+#   right: Sharpa Wave mounted palm-down (URDF-derived: 1.243 kg, COM
+#          (9.5, 2.2, 18.3) mm in the hand-root frame; mount rotation is
+#          near-identity). If the arm still droops or oscillates, run the
+#          vendor identify_tool_dyn() procedure and paste the result here.
+#   left:  Sharpa Wave mirrored mount (2026-10-16): same mass, COM y sign
+#          flipped. If the left arm droops/oscillates, run the vendor
+#          identify_tool_dyn() on the left arm instead of guessing.
+tool_dyn:
+  left:  [1.243, 9.5, -2.2, 18.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  right: [1.243, 9.5, 2.2, 18.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+hand_mount_quat_wxyz:
+  left: [-0.018037064599503157, -0.03877759776802879, 0.015161084848248945, 0.9989700214311731]
+  right: [0.018048128629735483, -0.03877409541188934, -0.015160591413682431, 0.9989699650369582]
+
+# =============================================================================
+# Initial end-effector pose (Chest coordinate system)
+# =============================================================================
+# Legacy ROS/vendor-IK poses, recomputed offline with Marvin_Kine.fk from
+# ccs_m6.MvKDCfg for init_joints. Unified teleop computes its reference FK
+# directly from the URDF and does not use these cached Cartesian values.
+
+# End-effector position [x, y, z] meters
+init_pos:
+  left:  [0.4322906916, 0.2540901533, 0.1758799399]
+  right: [0.4322906916, -0.2540901532, 0.1758799400]
+
+# End-effector orientation - rotation matrix (3x3, row-major)
+init_rot:
+  left:
+    - [0.000000113, 0.000035628, 0.9999999993]
+    - [-0.9999999999, 0.0000044922, 0.0000001128]
+    - [-0.0000044922, -0.9999999994, 0.000035628]
+  right:
+    - [0.0000001127, -0.000035628, 0.9999999993]
+    - [1.0, 0.0000044922, -0.0000001125]
+    - [-0.0000044922, 0.9999999993, 0.000035628]
+
+# End-effector orientation - quaternion [qx, qy, qz, qw] (converted from rotation matrix)
+init_quat:
+  left:  [-0.4999899981, 0.4999921878, -0.5000077556, 0.5000100582]
+  right: [0.4999899980, 0.4999921878, 0.5000077557, 0.5000100581]
+
+# =============================================================================
+# World -> Chest Coordinate Transform (legacy ROS driver)
+# =============================================================================
+# World coordinate system (ROS REP 103): X=forward, Y=left, Z=up
+# Chest coordinate system:
+#   Left:  X=forward, Y=down, Z=left (rotated +90 deg around World X axis)
+#   Right: X=forward, Y=up, Z=right (rotated -90 deg around World X axis)
+
+# Quaternion [qx, qy, qz, qw]
+world_to_chest_quat:
+  left:  [0.7071067811865475, 0.0, 0.0, 0.7071067811865475]   # Rotation +90 deg around X axis
+  right: [0.7071067811865475, 0.0, 0.0, -0.7071067811865475]  # Rotation -90 deg around X axis
+
+# Translation (for RViz visualization)
+world_to_chest_trans:
+  left:  [0.0, 0.2, 0.0]
+  right: [0.0, -0.2, 0.0]
+
+# =============================================================================
+# Forearm Tracker Initial Position (Chest Coordinate System) - legacy ROS
+# =============================================================================
+arm_init_pos:
+  left:  [0.2, 0.3, 0.2]
+  right: [0.2, -0.3, 0.2]
+
+arm_init_quat:
+  left:  [0.4177, -0.0283, 0.5206, 0.7441]
+  right: [0.7448, -0.5141, 0.0058, 0.4254]
+
+# =============================================================================
+# IK Parameters (legacy ROS driver; mujoco-marvin uses its own wrist-priority
+# IK with an elbow null-space task — see mujoco_marvin.ik)
+# =============================================================================
+zsp_type: 1
+
+default_zsp_para:
+  left:  [0, -0.5, -0.3, 0, 0, 0]
+  right: [0, 0.5, -0.3, 0, 0, 0]
+
+zsp_angle: 0.0
+
+dgr: [5.0, 5.0, 5.0]
+
+# =============================================================================
+# PICO -> Robot Coordinate Transform
+# =============================================================================
+# PICO coordinate system: +X=right, +Y=up, +Z=toward user (back)
+# Robot coordinate system: +X=forward, +Y=left, +Z=up
+# Transform matrix (3x3):
+#   Robot_X = -PICO_Z
+#   Robot_Y = -PICO_X
+#   Robot_Z = +PICO_Y
+pico_to_robot:
+  - [0, 0, -1]
+  - [-1, 0, 0]
+  - [0, 1, 0]

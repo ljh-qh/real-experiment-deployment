@@ -1,0 +1,14 @@
+customtkinter<6,>=5.2
+h5py<4,>=3.10
+hydra-core<2,>=1.3
+msgpack<2,>=1.0
+mujoco==3.3.7
+numpy<3,>=1.26
+opencv-python<5,>=4.8
+protobuf<3.21,>=3.20
+pynput<2,>=1.7
+pyyaml<7,>=6
+pyzmq<28,>=25
+rich>=13
+scipy<2,>=1.10
+tqdm<5,>=4.66

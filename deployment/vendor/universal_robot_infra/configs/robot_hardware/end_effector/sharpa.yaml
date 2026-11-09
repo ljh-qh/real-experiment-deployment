@@ -1,0 +1,87 @@
+role: end_effector
+name: sharpa
+sdk:
+  vendor_root: /home/admin2026/lianjh/real_experiment/deployment/sdk/sharpa/python
+network:
+  host_ip: 192.168.10.180
+hands:
+  right:
+    expected_sn: CA56933FCA57
+    expected_ip: 192.168.10.20
+  left:
+    expected_sn: C65E9038C65F
+    expected_ip: 192.168.10.10
+discovery_timeout_s: 5.0
+speed_coeff: 0.6
+current_coeff: 0.6
+skip_tactile: true
+interpolate: false
+initialize_control_on_connect: true
+enable_on_connect: true
+joints:
+  - name: right_thumb_CMC_FE
+    min_rad: -0.1745
+    max_rad: 1.9199
+  - name: right_thumb_CMC_AA
+    min_rad: -0.3491
+    max_rad: 0.3491
+  - name: right_thumb_MCP_FE
+    min_rad: -0.5236
+    max_rad: 1.3963
+  - name: right_thumb_MCP_AA
+    min_rad: -0.3491
+    max_rad: 0.3491
+  - name: right_thumb_IP
+    min_rad: 0.0
+    max_rad: 1.7453
+  - name: right_index_MCP_FE
+    min_rad: -0.17453293
+    max_rad: 1.5708
+  - name: right_index_MCP_AA
+    min_rad: -0.3491
+    max_rad: 0.3491
+  - name: right_index_PIP
+    min_rad: 0.0
+    max_rad: 1.7453
+  - name: right_index_DIP
+    min_rad: 0.0
+    max_rad: 1.3963
+  - name: right_middle_MCP_FE
+    min_rad: -0.17453293
+    max_rad: 1.5708
+  - name: right_middle_MCP_AA
+    min_rad: -0.3491
+    max_rad: 0.3491
+  - name: right_middle_PIP
+    min_rad: 0.0
+    max_rad: 1.7453
+  - name: right_middle_DIP
+    min_rad: 0.0
+    max_rad: 1.3963
+  - name: right_ring_MCP_FE
+    min_rad: -0.17453293
+    max_rad: 1.5708
+  - name: right_ring_MCP_AA
+    min_rad: -0.3491
+    max_rad: 0.3491
+  - name: right_ring_PIP
+    min_rad: 0.0
+    max_rad: 1.7453
+  - name: right_ring_DIP
+    min_rad: 0.0
+    max_rad: 1.3963
+  - name: right_pinky_CMC
+    min_rad: 0.0
+    max_rad: 0.2618
+  - name: right_pinky_MCP_FE
+    min_rad: -0.17453293
+    max_rad: 1.5708
+  - name: right_pinky_MCP_AA
+    min_rad: -0.3491
+    max_rad: 0.3491
+  - name: right_pinky_PIP
+    min_rad: 0.0
+    max_rad: 1.7453
+  - name: right_pinky_DIP
+    min_rad: 0.0
+    max_rad: 1.3963

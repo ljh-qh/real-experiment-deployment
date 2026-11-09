@@ -1,0 +1,36 @@
+type: libero
+
+# Archived draft: the local train/val views were removed on 2026-09-14.
+# Recreate them explicitly with dataset_tools/create_openwam_trainval_views.py
+# only if this offline holdout protocol is selected for a separate experiment.
+# Held-out validation view for the local ModelScope LIBERO IsaacSim data.
+# Uses train-view normalization stats to avoid validation leakage.
+dataset_dir: /home/nvme/lijiawang/LIBERO_IsaacSim_Lerobot_openwam_eef10_trainval/val
+
+action_mode: eef
+unify_action: true
+unify_action_map: ["0-9"]
+unify_state_map: null
+
+num_frames: 33
+video_stride: 4
+window_stride: 1
+split: val
+
+height: 384
+width: 320
+multiview: true
+camera_layout:
+  - observation.images.agentview_cam
+  - observation.images.eye_in_hand_cam
+  - null
+target_camera: null
+
+normalize_mode: min-max
+
+color_jitter:
+  enabled: false
+  brightness: 0.2
+  contrast: 0.2
+  saturation: 0.2
+  hue: 0.0

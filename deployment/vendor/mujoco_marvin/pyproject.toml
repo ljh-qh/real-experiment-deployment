@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mujoco-marvin"
+version = "0.1.0"
+description = "MuJoCo teleoperation for Tianji dual Marvin M6 arms and Wuji dexterous hands"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Wuji Technology Co., Ltd." }]
+keywords = ["teleoperation", "mujoco", "dual-arm", "dexterous-hand", "retargeting"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Human Machine Interfaces",
+    "Topic :: Scientific/Engineering :: Robotics",
+]
+dependencies = [
+    "mujoco==3.3.7",
+    "numpy",
+    "scipy",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+# RealSense cameras and unified HDF5/MP4/depth episode recording.
+episode = [
+    "pyrealsense2",
+    "imageio",
+    "imageio-ffmpeg",
+    "Pillow",
+    "h5py",
+    "pyzmq",
+]
+# Offline analysis of teleop JSONL recordings.
+plot = ["matplotlib"]
+# Body-mode ROS 2 finger bridge (--hand-input ros). rclpy must come from a ROS 2
+# distribution (e.g. apt ros-humble-rclpy); it cannot be installed from PyPI.
+ros = ["rclpy"]
+# Direction calibration GUI. tkinter ships with CPython; on Debian/Ubuntu install
+# the OS package python3-tk if it is missing.
+calibrate = []
+
+[project.urls]
+# Repository URL set by the publisher; the code originates from the
+# wuji-hand-teleop workspace (tools/marvin_sim).
+
+[project.scripts]
+mujoco-marvin = "mujoco_marvin.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mujoco_marvin*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

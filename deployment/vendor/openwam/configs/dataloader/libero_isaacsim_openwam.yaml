@@ -1,0 +1,36 @@
+type: libero
+
+# Local ModelScope LIBERO IsaacSim data adapted to OpenWAM's native EEF10
+# LIBERO reader contract.  The adapter provenance lives in:
+#   /home/nvme/lijiawang/LIBERO_IsaacSim_Lerobot_openwam_eef10/meta/conversion.json
+dataset_dir: /data/9qTymlC6XNreTg7J/home/lijiawang/openWAM/LIBERO_IsaacSim_Lerobot_openwam_eef10
+
+action_mode: eef
+unify_action: true
+unify_action_map: ["0-9"]
+unify_state_map: null
+
+num_frames: 33
+video_stride: 4
+window_stride: 1
+split: train
+
+height: 384
+width: 320
+multiview: true
+camera_layout:
+  - observation.images.agentview_cam
+  - observation.images.eye_in_hand_cam
+  - null
+# The reader gives target_camera precedence over camera_layout; leave it unset
+# so both the head and wrist streams are decoded in multiview mode.
+target_camera: null
+
+normalize_mode: min-max
+
+color_jitter:
+  enabled: false
+  brightness: 0.2
+  contrast: 0.2
+  saturation: 0.2
+  hue: 0.0

@@ -1,0 +1,33 @@
+{
+  "scope": "CPU-only interface/config verification; no GPU model loading, 4090 benchmarking, or robot commands",
+  "actual_training_sample": {
+    "video_frames": 9,
+    "image_width": 320,
+    "image_height": 384,
+    "action_shape": [
+      32,
+      80
+    ],
+    "proprio_shape": [
+      1,
+      80
+    ],
+    "action_mask_shape": [
+      32,
+      80
+    ],
+    "proprio_mask_shape": [
+      1,
+      80
+    ],
+    "prompt": "badminton"
+  },
+  "normalization_roundtrip_max_abs": 2.384185791015625e-07,
+  "other_checks": [
+    "deploy config merged with checkpoint config",
+    "inference config validated",
+    "CLI flags parsed",
+    "62 active / 18 inactive slots and all 22 hand joint names verified",
+    "local document links exist"
+  ]
+}

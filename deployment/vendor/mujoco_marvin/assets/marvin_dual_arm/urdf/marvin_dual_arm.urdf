@@ -1,0 +1,561 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<robot name="marvin_dual_arm"><!--Merged dual-arm robot: M6-S stand (base_m6) + dual-arm mount plate (Dual_arm_mount-m6)
+     + Marvin M6-S-L/CCS-809 (left) + Marvin M6-S-R/CCS-809 (right).
+     Arm base frames are identical to the simplified-assembly Link0 frames (same Base_Marvin part),
+     so arms are attached at the mount plate's Joint0 transforms; the splay is realized by the plate pose.
+     Reproduces the base_m6 assembly poses exactly (verified numerically).--><link name="world"/><joint name="world_to_base_stand" type="fixed">
+  <origin xyz="-0.172350 -1.263000 0.453100" rpy="0 0 3.141592653589793"/>
+  <parent link="world"/>
+  <child link="base_stand"/>
+  <axis xyz="0 0 0"/>
+</joint><link name="base_stand">
+    <inertial>
+      <origin xyz="-0.176790905282451 -0.148310567097169 1.26319297662678" rpy="0 0 0"/>
+      <mass value="63.8"/>
+      <inertia ixx="1.37583471426402" ixy="1.88851322709178E-05" ixz="-0.00151792373949741" iyy="1.04445359333388" iyz="-1.02206905001694E-05" izz="1.32930702405116"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/base_stand.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/base_stand.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="dual_arm_mount">
+    <inertial>
+      <origin xyz="-6.74626172031401E-06 -1.97452439857082E-05 0.0830986323803694" rpy="0 0 0"/>
+      <mass value="1.66019992733582"/>
+      <inertia ixx="0.0069121179974586" ixy="2.18630296380752E-08" ixz="5.01040984395227E-08" iyy="0.00708860452961552" iyz="3.17861317060297E-07" izz="0.00424354503605702"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/dual_arm_mount.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/dual_arm_mount.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="stand_to_dual_arm_mount" type="fixed"><origin xyz="-0.172325492 -1.26288954 0.6078833769" rpy="0 0 -1.617710926"/><parent link="base_stand"/><child link="dual_arm_mount"/><axis xyz="0 0 0"/></joint><joint name="mount_to_arm_base_L" type="fixed"><origin xyz="0.0470005034 0 0.142" rpy="-1.570796327 0 -1.570796327"/><parent link="dual_arm_mount"/><child link="Base_L"/><axis xyz="0 0 0"/></joint><joint name="mount_to_arm_base_R" type="fixed"><origin xyz="-0.0469994966 0 0.142" rpy="1.570796327 0 -1.570796327"/><parent link="dual_arm_mount"/><child link="Base_R"/><axis xyz="0 0 0"/></joint><link name="Base_L">
+    <inertial>
+      <origin xyz="0.00032267 4.798E-05 0.04066353" rpy="0 0 0"/>
+      <mass value="1.1962"/>
+      <inertia ixx="0.00107329" ixy="-1.68E-06" ixz="-1.05E-05" iyy="0.00107003" iyz="-3.43E-06" izz="0.00127315"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Base_L.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Base_L.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="Link1_L">
+    <inertial>
+      <origin xyz="0.00002347 0.00557150 -0.03075998" rpy="0 0 0"/>
+      <mass value="1.9705"/>
+      <inertia ixx="0.00492293" ixy="0.00000550" ixz="0.00000193" iyy="0.00526513" iyz="0.00033232" izz="0.00188107"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link1_L.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link1_L.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint1_L" type="revolute">
+    <origin xyz="0 0 0.1745" rpy="0 0 0"/>
+    <parent link="Base_L"/>
+    <child link="Link1_L"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.1067" upper="3.1067" effort="108" velocity="3.1416"/>
+  </joint>
+  <link name="Link2_L">
+    <inertial>
+      <origin xyz="0.00013483 0.06170460 0.00950639" rpy="0 0 0"/>
+      <mass value="2.24398"/>
+      <inertia ixx="0.01194933" ixy="0.00000336" ixz="0.00000091" iyy="0.00361581" iyz="-0.00132804" izz="0.01098356"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link2_L.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link2_L.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint2_L" type="revolute">
+    <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    <parent link="Link1_L"/>
+    <child link="Link2_L"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.0944" upper="2.0944" effort="108" velocity="3.1416"/>
+  </joint>
+  <link name="Link3_L">
+    <inertial>
+      <origin xyz="0.00588308 0.00079656 -0.11435153" rpy="0 0 0"/>
+      <mass value="2.24598712"/>
+      <inertia ixx="0.02297472" ixy="0.00002807" ixz="0.00155392" iyy="0.02333711" iyz="0.00021547" izz="0.00260810"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link3_L.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link3_L.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint3_L" type="revolute">
+    <origin xyz="0 0.4 0" rpy="-1.5708 0 0"/>
+    <parent link="Link2_L"/>
+    <child link="Link3_L"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.1067" upper="3.1067" effort="66" velocity="3.1416"/>
+  </joint>
+  <link name="Link4_L">
+    <inertial>
+      <origin xyz="0.00850411 -0.04718223 0.00941509" rpy="0 0 0"/>
+      <mass value="1.6085"/>
+      <inertia ixx="0.00580480" ixy="-0.00066669" ixz="-0.00012722" iyy="0.00223807" iyz="0.00070523" izz="0.00533060"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link4_L.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link4_L.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint4_L" type="revolute">
+    <origin xyz="0.018 0 0" rpy="-1.5708 0 3.1416"/>
+    <parent link="Link3_L"/>
+    <child link="Link4_L"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.5307" upper="1.0472" effort="66" velocity="3.1416"/>
+  </joint>
+  <link name="Link5_L">
+    <inertial>
+      <origin xyz="0.00051127 0.00101064 -0.11271739" rpy="0 0 0"/>
+      <mass value="2.0883"/>
+      <inertia ixx="0.00626603" ixy="0.00004009" ixz="0.00005338" iyy="0.00564387" iyz="-0.00006193" izz="0.00243632"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link5_L.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link5_L.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint5_L" type="revolute">
+    <origin xyz="0.018 -0.314 0" rpy="-1.5708 0 3.1416"/>
+    <parent link="Link4_L"/>
+    <child link="Link5_L"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.1067" upper="3.1067" effort="18" velocity="3.1416"/>
+  </joint>
+  <link name="Link6_L">
+    <inertial>
+      <origin xyz="0.00032659 0.00531336 -0.00030182" rpy="0 0 0"/>
+      <mass value="0.72496"/>
+      <inertia ixx="0.00046040" ixy="0.00000189" ixz="0.00000083" iyy="0.00051716" iyz="-0.00000346" izz="0.00042521"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link6_L.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link6_L.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint6_L" type="revolute">
+    <origin xyz="0 0 0" rpy="1.5708 -1.5708 0"/>
+    <parent link="Link5_L"/>
+    <child link="Link6_L"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.0472" upper="1.0472" effort="18" velocity="3.1416"/>
+  </joint>
+  <link name="Link7_L">
+    <inertial>
+      <origin xyz="-0.00009108 -0.03153255 0.00889371" rpy="0 0 0"/>
+      <mass value="0.68606"/>
+      <inertia ixx="0.00173687" ixy="-0.00000345" ixz="-0.00000116" iyy="0.00089035" iyz="0.00030680" izz="0.00139406"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link7_L.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link7_L.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint7_L" type="revolute">
+    <origin xyz="0 0 0" rpy="1.5708 -1.5708 0"/>
+    <parent link="Link6_L"/>
+    <child link="Link7_L"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.5708" upper="1.5708" effort="18" velocity="3.1416"/>
+  </joint>
+  <link name="TCP_Link_L">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/TCP_Link_L.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/TCP_Link_L.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="JointTCP_L" type="fixed">
+    <origin xyz="0 -0.095 0" rpy="1.5708 -1.5708 0"/>
+    <parent link="Link7_L"/>
+    <child link="TCP_Link_L"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+<link name="Base_R">
+    <inertial>
+      <origin xyz="0.00032267 4.798E-05 0.04066353" rpy="0 0 0"/>
+      <mass value="1.1962"/>
+      <inertia ixx="0.00107329" ixy="-1.68E-06" ixz="-1.05E-05" iyy="0.00107003" iyz="-3.43E-06" izz="0.00127315"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Base_R.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Base_R.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="Link1_R">
+    <inertial>
+      <origin xyz="0.00002347 0.00557150 -0.03075998" rpy="0 0 0"/>
+      <mass value="1.9705"/>
+      <inertia ixx="0.00492293" ixy="0.00000550" ixz="0.00000193" iyy="0.00526513" iyz="0.00033232" izz="0.00188107"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link1_R.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link1_R.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint1_R" type="revolute">
+    <origin xyz="0 0 0.1745" rpy="0 0 0"/>
+    <parent link="Base_R"/>
+    <child link="Link1_R"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.1067" upper="3.1067" effort="108" velocity="3.1416"/>
+  </joint>
+  <link name="Link2_R">
+    <inertial>
+      <origin xyz="0.00013483 0.06170460 0.00950639" rpy="0 0 0"/>
+      <mass value="2.24398"/>
+      <inertia ixx="0.01194933" ixy="0.00000336" ixz="0.00000091" iyy="0.00361581" iyz="-0.00132804" izz="0.01098356"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link2_R.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link2_R.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint2_R" type="revolute">
+    <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    <parent link="Link1_R"/>
+    <child link="Link2_R"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.0944" upper="2.0944" effort="108" velocity="3.1416"/>
+  </joint>
+  <link name="Link3_R">
+    <inertial>
+      <origin xyz="0.00588308 0.00079656 -0.11435153" rpy="0 0 0"/>
+      <mass value="2.24598712"/>
+      <inertia ixx="0.02297472" ixy="0.00002807" ixz="0.00155392" iyy="0.02333711" iyz="0.00021547" izz="0.00260810"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link3_R.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link3_R.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint3_R" type="revolute">
+    <origin xyz="0 0.4 0" rpy="-1.5708 0 0"/>
+    <parent link="Link2_R"/>
+    <child link="Link3_R"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.1067" upper="3.1067" effort="66" velocity="3.1416"/>
+  </joint>
+  <link name="Link4_R">
+    <inertial>
+      <origin xyz="0.00850411 -0.04718223 0.00941509" rpy="0 0 0"/>
+      <mass value="1.6085"/>
+      <inertia ixx="0.00580480" ixy="-0.00066669" ixz="-0.00012722" iyy="0.00223807" iyz="0.00070523" izz="0.00533060"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link4_R.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link4_R.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint4_R" type="revolute">
+    <origin xyz="0.018 0 0" rpy="-1.5708 0 3.1416"/>
+    <parent link="Link3_R"/>
+    <child link="Link4_R"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.5307" upper="1.0472" effort="66" velocity="3.1416"/>
+  </joint>
+  <link name="Link5_R">
+    <inertial>
+      <origin xyz="-0.00051127 -0.00101064 -0.11271739" rpy="0 0 0"/>
+      <mass value="2.0883"/>
+      <inertia ixx="0.00626603" ixy="0.00004009" ixz="-0.00005338" iyy="0.00564387" iyz="0.00006193" izz="0.00243632"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link5_R.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link5_R.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint5_R" type="revolute">
+    <origin xyz="0.018 -0.314 0" rpy="-1.5708 0 3.1416"/>
+    <parent link="Link4_R"/>
+    <child link="Link5_R"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.1067" upper="3.1067" effort="18" velocity="3.1416"/>
+  </joint>
+  <link name="Link6_R">
+    <inertial>
+      <origin xyz="-0.00032659 0.00531336 0.00030182" rpy="0 0 0"/>
+      <mass value="0.72496"/>
+      <inertia ixx="0.00046040" ixy="-0.00000189" ixz="0.00000083" iyy="0.00051716" iyz="0.00000346" izz="0.00042521"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link6_R.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link6_R.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint6_R" type="revolute">
+    <origin xyz="0 0 0" rpy="1.5708 -1.5708 0"/>
+    <parent link="Link5_R"/>
+    <child link="Link6_R"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.0472" upper="1.0472" effort="18" velocity="3.1416"/>
+  </joint>
+  <link name="Link7_R">
+    <inertial>
+      <origin xyz="-0.00009108 -0.03153255 0.00889371" rpy="0 0 0"/>
+      <mass value="0.68606"/>
+      <inertia ixx="0.00173687" ixy="-0.00000345" ixz="-0.00000116" iyy="0.00089035" iyz="0.00030680" izz="0.00139406"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link7_R.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/Link7_R.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="Joint7_R" type="revolute">
+    <origin xyz="0 0 0" rpy="1.5708 -1.5708 0"/>
+    <parent link="Link6_R"/>
+    <child link="Link7_R"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.5708" upper="1.5708" effort="18" velocity="3.1416"/>
+  </joint>
+  <link name="TCP_Link_R">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/TCP_Link_R.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://marvin_dual_arm/meshes/TCP_Link_R.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="JointTCP_R" type="fixed">
+    <origin xyz="0 -0.095 0" rpy="1.5708 -1.5708 0"/>
+    <parent link="Link7_R"/>
+    <child link="TCP_Link_R"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+</robot>

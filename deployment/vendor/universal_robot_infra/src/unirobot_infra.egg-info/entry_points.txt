@@ -1,0 +1,24 @@
+[console_scripts]
+unirobot-infra-calibration-collect = unirobot_infra.apps.calibration.collect:main
+unirobot-infra-calibration-solve = unirobot_infra.apps.calibration.solve:main
+unirobot-infra-calibration-verify = unirobot_infra.apps.calibration.verify:main
+unirobot-infra-calibration-visualize-camera = unirobot_infra.apps.calibration.visualize_camera:main
+unirobot-infra-convert-lerobot = unirobot_infra.apps.postprocess.convert_lerobot:main
+unirobot-infra-demo-dual-grasp-cup-bottle = unirobot_infra.apps.demo.dual_grasp_cup_bottle:main
+unirobot-infra-demo-left-grasp-cup = unirobot_infra.apps.demo.left_grasp_cup:main
+unirobot-infra-demo-right-grasp-bottle = unirobot_infra.apps.demo.right_grasp_bottle:main
+unirobot-infra-detection-loop = unirobot_infra.apps.perception.detection_loop:main
+unirobot-infra-echo-robot-state = unirobot_infra.apps.robot_ops.echo_robot_state:main
+unirobot-infra-inspect-resampling-timeline = unirobot_infra.apps.postprocess.inspect_resampling_timeline:main
+unirobot-infra-move-tianji-tcp-pose = unirobot_infra.apps.robot_ops.move_tianji_tcp_pose:main
+unirobot-infra-openpi-policy-control-loop = unirobot_infra.apps.openpi_policy_control_loop:main
+unirobot-infra-perception-loop = unirobot_infra.apps.perception.perception_loop:main
+unirobot-infra-push-lerobot = unirobot_infra.apps.postprocess.push_lerobot:main
+unirobot-infra-realtime-capture = unirobot_infra.apps.realtime_capture:main
+unirobot-infra-replay-lerobot = unirobot_infra.apps.replay_lerobot:main
+unirobot-infra-sharpa-adaptive-grasp = unirobot_infra.apps.robot_ops.sharpa_adaptive_grasp:main
+unirobot-infra-teleop = unirobot_infra.apps.teleop:main
+unirobot-infra-teleop-pico = unirobot_infra.apps.teleop_pico:main
+unirobot-infra-teleop-record = unirobot_infra.apps.teleop_record:main
+unirobot-infra-update-lerobot-readme = unirobot_infra.apps.postprocess.update_lerobot_readme:main
+unirobot-infra-visualize-lerobot = unirobot_infra.apps.postprocess.visualize_lerobot:main

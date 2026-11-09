@@ -1,0 +1,37 @@
+model: openwam
+worker:
+  python: $DEPLOY/envs/openwam/bin/python
+  script: $DEPLOY/vendor/bridge/zmq_chunk_worker.py
+  cwd: $DEPLOY
+  env:
+    PYTHONPATH: $DEPLOY/src:$DEPLOY/vendor/bridge:$DEPLOY/vendor/openwam:$DEPLOY/assets/robot:$DEPLOY/deps/bridge
+    WAM_ATTENTION_IMPL: sdpa
+    DIFFSYNTH_ATTENTION_IMPLEMENTATION: torch
+    OMP_NUM_THREADS: '2'
+    MKL_NUM_THREADS: '2'
+    OPENBLAS_NUM_THREADS: '2'
+  args:
+    config: $DEPLOY/configs/inference/openwam_sync_no_dit_cache.yaml
+    checkpoint: $DEPLOY/assets/checkpoints/openwam_bottle
+    checkpoint-name: checkpoint_step_65640.safetensors
+    codec: $DEPLOY/vendor/bridge/codec.py
+    observation-endpoint: tcp://127.0.0.1:17200
+    action-endpoint: tcp://127.0.0.1:17201
+    control-endpoint: tcp://127.0.0.1:17202
+    ready-file: $OUTPUT/worker_ready.json
+    context-cache: true
+    warmup-fixtures: $DEPLOY/assets/references/bottle_observations
+    task: bottle
+client:
+  hz: 30
+  sync: true
+  prefetch_delay: 16
+  duration: 0
+  max_joint_step_deg: 0
+  max_hand_step_deg: 2.0
+hardware:
+  vel_ratio: 20
+  acc_ratio: 20
+client_entrypoint: accepted_client.py
+task: bottle
+origin_reference: $DEPLOY/assets/references/bottle_demo_origin.json

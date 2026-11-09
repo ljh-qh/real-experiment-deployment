@@ -1,0 +1,60 @@
+role: arm
+name: tianji
+sdk_dir: /home/admin2026/lianjh/real_experiment/deployment/sdk/tianji
+kine_cfg: /home/admin2026/lianjh/real_experiment/deployment/sdk/tianji/ccs_m6.MvKDCfg
+robot_ip: 192.168.1.190
+robot_world_frame:
+  x: forward
+  y: left
+  z: up
+base_l_base_r_distance_m: 0.074
+arms:
+  left:
+    arm_id: A
+    sdk_xyz_from_robot_world:
+      - [1.0, 0.0, 0.0]
+      - [0.0, 0.0, -1.0]
+      - [0.0, 1.0, 0.0]
+  right:
+    arm_id: B
+    sdk_xyz_from_robot_world:
+      - [1.0, 0.0, 0.0]
+      - [0.0, 0.0, 1.0]
+      - [0.0, -1.0, 0.0]
+connect_settle_s: 0.5
+vel_ratio: 50
+acc_ratio: 50
+position_mode_settle_s: 0.5
+position_mode_wait_timeout_s: 5.0
+position_mode_wait_poll_s: 0.1
+feedback_ready_timeout_s: 2.0
+feedback_ready_poll_s: 0.05
+command_settle_s: 0.05
+command_tolerance_deg: 0.001
+send_cmd_retries: 2
+send_cmd_retry_sleep_s: 0.02
+ik:
+  zsp_type: 0
+  zsp_para: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+joints:
+  - name: tianji_j0
+    min_deg: -170.0
+    max_deg: 170.0
+  - name: tianji_j1
+    min_deg: -120.0
+    max_deg: 120.0
+  - name: tianji_j2
+    min_deg: -170.0
+    max_deg: 170.0
+  - name: tianji_j3
+    min_deg: -145.0
+    max_deg: 60.0
+  - name: tianji_j4
+    min_deg: -170.0
+    max_deg: 170.0
+  - name: tianji_j5
+    min_deg: -60.0
+    max_deg: 60.0
+  - name: tianji_j6
+    min_deg: -90.0
+    max_deg: 90.0

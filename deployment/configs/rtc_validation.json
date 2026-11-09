@@ -1,0 +1,4 @@
+{
+  "hardware_ready": false,
+  "reason": "Source-only export: perform local offline validation before live operation"
+}

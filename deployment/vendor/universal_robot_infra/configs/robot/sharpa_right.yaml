@@ -1,0 +1,10 @@
+defaults:
+  - /robot_hardware/end_effector@hardware.end_effector: sharpa
+  - _self_
+
+name: sharpa_right
+sides:
+  right:
+    parts:
+      - end_effector
+

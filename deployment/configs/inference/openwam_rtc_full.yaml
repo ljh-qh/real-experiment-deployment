@@ -1,0 +1,41 @@
+device: cuda:0
+server:
+  host: 0.0.0.0
+  port: 8848
+inference:
+  num_frames: 33
+  video_num_frames: 9
+  height: 384
+  width: 320
+  denoise_steps: 10
+  denoise_mode: sync
+  inference_mode: sync
+  inference_horizon: 32
+  inference_delay_steps: null
+optimization:
+  decode_video: false
+  dit_cache:
+    enabled: false
+    cosine_threshold: 0.99
+    max_skips: 3
+  compile:
+    enabled: false
+    self_attn:
+      torch_mode: default
+      dynamic: false
+    cross_attn:
+      torch_mode: default
+      dynamic: false
+    idm:
+      torch_mode: reduce-overhead
+      dynamic: false
+      video_loop:
+        enabled: true
+      action_cache:
+        enabled: true
+    tri_system:
+      torch_mode: reduce-overhead
+      dynamic: false
+  prompt_embed_cache:
+    enabled: true
+    maxsize: 32

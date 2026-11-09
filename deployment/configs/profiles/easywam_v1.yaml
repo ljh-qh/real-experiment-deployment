@@ -1,0 +1,34 @@
+model: easywam
+version: v1
+worker:
+  python: $DEPLOY/envs/easywam/bin/python
+  script: $DEPLOY/src/easywam_worker.py
+  cwd: $DEPLOY
+  env:
+    PYTHONPATH: $DEPLOY/src:$DEPLOY/vendor/easywam/src:$DEPLOY/vendor/easywam
+    EASYWAM_COMPILE: '1'
+    EASYWAM_FULLGRAPH: '0'
+    OMP_NUM_THREADS: '2'
+    MKL_NUM_THREADS: '2'
+  args:
+    version: v1
+    device: cuda:0
+    observation-endpoint: tcp://127.0.0.1:17200
+    action-endpoint: tcp://127.0.0.1:17201
+    control-endpoint: tcp://127.0.0.1:17202
+    ready-file: $OUTPUT/worker_ready.json
+    codec: $DEPLOY/vendor/bridge/codec.py
+    warmup-fixtures: $DEPLOY/assets/references/fixed_observation_diagnosis
+client:
+  hz: 30
+  sync: true
+  prefetch_delay: 16
+  duration: 30
+  max_joint_step_deg: 0
+  max_hand_step_deg: 3.0
+hardware:
+  vel_ratio: 50
+  acc_ratio: 50
+client_entrypoint: accepted_client.py
+note: 'Original EasyWAM v1 profile: 30 seconds, hand 3 deg/tick, infra hardware 50/50;
+  not a new tuned preset.'

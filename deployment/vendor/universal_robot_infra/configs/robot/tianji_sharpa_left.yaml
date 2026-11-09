@@ -1,0 +1,11 @@
+defaults:
+  - /robot_hardware/arm@hardware.arm: tianji
+  - /robot_hardware/end_effector@hardware.end_effector: sharpa
+  - _self_
+
+name: tianji_sharpa_left
+sides:
+  left:
+    parts:
+      - arm
+      - end_effector

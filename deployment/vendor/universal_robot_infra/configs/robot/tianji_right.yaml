@@ -1,0 +1,9 @@
+defaults:
+  - /robot_hardware/arm@hardware.arm: tianji
+  - _self_
+
+name: tianji_right
+sides:
+  right:
+    parts:
+      - arm

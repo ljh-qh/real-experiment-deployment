@@ -1,0 +1,91 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unirobot-infra"
+version = "0.1.0"
+description = "Teleoperation, recording, postprocess, and replay toolkit for Tianji arms and Sharpa hands."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "customtkinter>=5.2,<6",
+    "h5py>=3.10,<4",
+    "hydra-core>=1.3,<2",
+    "msgpack>=1.0,<2",
+    "mujoco==3.3.7",
+    "numpy>=1.26,<3",
+    "opencv-python>=4.8,<5",
+    "protobuf>=3.20,<3.21",
+    "pynput>=1.7,<2",
+    "pyyaml>=6,<7",
+    "pyzmq>=25,<28",
+    "rich>=13",
+    "scipy>=1.10,<2",
+    "tqdm>=4.66,<5",
+]
+
+[project.scripts]
+unirobot-infra-teleop = "unirobot_infra.apps.teleop:main"
+unirobot-infra-teleop-pico = "unirobot_infra.apps.teleop_pico:main"
+unirobot-infra-teleop-record = "unirobot_infra.apps.teleop_record:main"
+unirobot-infra-openpi-policy-control-loop = "unirobot_infra.apps.openpi_policy_control_loop:main"
+unirobot-infra-replay-lerobot = "unirobot_infra.apps.replay_lerobot:main"
+unirobot-infra-echo-robot-state = "unirobot_infra.apps.robot_ops.echo_robot_state:main"
+unirobot-infra-realtime-capture = "unirobot_infra.apps.realtime_capture:main"
+unirobot-infra-convert-lerobot = "unirobot_infra.apps.postprocess.convert_lerobot:main"
+unirobot-infra-update-lerobot-readme = "unirobot_infra.apps.postprocess.update_lerobot_readme:main"
+unirobot-infra-inspect-resampling-timeline = "unirobot_infra.apps.postprocess.inspect_resampling_timeline:main"
+unirobot-infra-visualize-lerobot = "unirobot_infra.apps.postprocess.visualize_lerobot:main"
+unirobot-infra-push-lerobot = "unirobot_infra.apps.postprocess.push_lerobot:main"
+unirobot-infra-move-tianji-tcp-pose = "unirobot_infra.apps.robot_ops.move_tianji_tcp_pose:main"
+unirobot-infra-sharpa-adaptive-grasp = "unirobot_infra.apps.robot_ops.sharpa_adaptive_grasp:main"
+unirobot-infra-calibration-collect = "unirobot_infra.apps.calibration.collect:main"
+unirobot-infra-calibration-solve = "unirobot_infra.apps.calibration.solve:main"
+unirobot-infra-calibration-verify = "unirobot_infra.apps.calibration.verify:main"
+unirobot-infra-calibration-visualize-camera = "unirobot_infra.apps.calibration.visualize_camera:main"
+unirobot-infra-perception-loop = "unirobot_infra.apps.perception.perception_loop:main"
+unirobot-infra-detection-loop = "unirobot_infra.apps.perception.detection_loop:main"
+unirobot-infra-demo-left-grasp-cup = "unirobot_infra.apps.demo.left_grasp_cup:main"
+unirobot-infra-demo-right-grasp-bottle = "unirobot_infra.apps.demo.right_grasp_bottle:main"
+unirobot-infra-demo-dual-grasp-cup-bottle = "unirobot_infra.apps.demo.dual_grasp_cup_bottle:main"
+
+[dependency-groups]
+camera = []
+dev = [
+    "pytest>=8",
+]
+# RealSense cameras and unified HDF5/MP4/depth episode recording.
+episode = [
+    "pyrealsense2",
+    "imageio",
+    "imageio-ffmpeg",
+    "Pillow",
+    "h5py",
+    "pyzmq",
+]
+postprocess = [
+    "huggingface-hub==1.19.0",
+    "lerobot==0.5.1",
+    "rerun-sdk==0.26.2",
+]
+perception = [
+    "rerun-sdk==0.26.2",
+    "ultralytics>=8.3.0",
+]
+mujoco = [
+    "mujoco>=3.2,<4",
+]
+# Offline analysis of teleop JSONL recordings.
+plot = [
+    "matplotlib",
+]
+
+[tool.uv]
+package = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

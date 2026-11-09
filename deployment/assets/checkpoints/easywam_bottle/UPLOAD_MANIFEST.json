@@ -1,0 +1,40 @@
+{
+  "checkpoint": "step_008205.pt",
+  "total_size": 5557637977,
+  "sha256": "2158986697db7d534a984964c989c9ffd074a5fa7f53e51a62e5eaff609ca7f2",
+  "source": "/datapool/lianjh/openwam/runs/bottle/easywam_bottle/checkpoints/weights/step_008205.pt",
+  "repo": "ljhqh24/easywam",
+  "prefix": "bottle_5ep",
+  "parts": [
+    {
+      "name": "part_00",
+      "size": 1073741824,
+      "sha256": "3b909f0cf453a60bc7fe980df1441326d50fd8c40047e927932ce596656ff2e7"
+    },
+    {
+      "name": "part_01",
+      "size": 1073741824,
+      "sha256": "d40ba8cfd5f391e0db5a5af04928cd8cbc1edf7f5a8e4c2ae323e141d229cbc4"
+    },
+    {
+      "name": "part_02",
+      "size": 1073741824,
+      "sha256": "ce65206207b2307aaef0f8c7dcf68a299e9077a9a93730c668241954c2210dcb"
+    },
+    {
+      "name": "part_03",
+      "size": 1073741824,
+      "sha256": "232d1189fa038a1d9e6920a9b7b4d7cefd62b1ec30ff6ce696dd8e6370db3735"
+    },
+    {
+      "name": "part_04",
+      "size": 1073741824,
+      "sha256": "6e170544395af5e02914e2aeca7b526caefb010cf505fae53daaf834fe70ca5b"
+    },
+    {
+      "name": "part_05",
+      "size": 188928857,
+      "sha256": "1348eb9236209d587327f10ba4979296d284105dcabd538506b5c12c41b53c2c"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # 独立真机部署目录
 
+> 安装、资源恢复和各任务启动请先阅读 [仓库根目录 README](../README.md)；本文保留历史迁移记录，当前参数以 [配置总结](DEPLOYMENT_CONFIG_SUMMARY.md) 为准。
+
 服务器 `4090-zhenji`，固定根目录：`/home/admin2026/lianjh/real_experiment/deployment`。
 
 这里保存当前部署的代码、配置、独立环境、SDK、模型、参考数据和实验输出。Universal Robot infra、OpenWAM、EasyWAM、MuJoCo-Marvin 都是项目内副本；运行入口不再读取其他人的工程。没有回源软链接或硬链接。原工程保持原样，迁移前本项目的部署文件保存在 `migration/original_flat/`。
